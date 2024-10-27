@@ -308,32 +308,6 @@ class PlacePickerState extends State<UltraMapPlacePicker> {
 
   @override
   Widget build(final BuildContext context) {
-    final mapSearchBar = MapSearchBar(
-                          showIntroModal: showIntroModal,
-                          introModalWidgetBuilder:
-                              widget.introModalWidgetBuilder,
-                          onTapBack: widget.onTapBack,
-                          appBarKey: appBarKey,
-                          provider: provider,
-                          searchBarController: searchBarController,
-                          autocompleteOffset: widget.autocompleteOffset,
-                          hintText: widget.hintText,
-                          searchingText: widget.searchingText,
-                          region: widget.region,
-                          strictbounds: widget.strictbounds,
-                          autocompleteTypes: widget.autocompleteTypes,
-                          onAutoCompleteFailed: widget.onAutoCompleteFailed,
-                          autoCompleteDebounceInMilliseconds:
-                              widget.autoCompleteDebounceInMilliseconds,
-                          autocompleteRadius: widget.autocompleteRadius,
-                          autocompleteLanguage: widget.autocompleteLanguage,
-                          initialSearchString: widget.initialSearchString,
-                          autocompleteOnTrailingWhitespace:
-                              widget.autocompleteOnTrailingWhitespace,
-                          searchForInitialValue: widget.searchForInitialValue,
-                          autocompleteComponents: widget.autocompleteComponents,
-                          onPicked: _pickPrediction
-                      );
     return PopScope(
         onPopInvokedWithResult: (_, __) => searchBarController.clearOverlay(),
         child: FutureBuilder<PlaceProvider>(
@@ -361,7 +335,36 @@ class PlacePickerState extends State<UltraMapPlacePicker> {
                       shadowColor: Colors.transparent,
                       backgroundColor: Colors.transparent,
                       titleSpacing: 0.0,
-                      title: widget.showSearchBar ? mapSearchBar : const SizedBox()
+                      title:   SizedBox(
+                        height: widget.showSearchBar ? null : 0,
+                        width: widget.showSearchBar ? null : 0,
+                        child: MapSearchBar(
+                            showIntroModal: showIntroModal,
+                            introModalWidgetBuilder:
+                                widget.introModalWidgetBuilder,
+                            onTapBack: widget.onTapBack,
+                            appBarKey: appBarKey,
+                            provider: provider,
+                            searchBarController: searchBarController,
+                            autocompleteOffset: widget.autocompleteOffset,
+                            hintText: widget.hintText,
+                            searchingText: widget.searchingText,
+                            region: widget.region,
+                            strictbounds: widget.strictbounds,
+                            autocompleteTypes: widget.autocompleteTypes,
+                            onAutoCompleteFailed: widget.onAutoCompleteFailed,
+                            autoCompleteDebounceInMilliseconds:
+                                widget.autoCompleteDebounceInMilliseconds,
+                            autocompleteRadius: widget.autocompleteRadius,
+                            autocompleteLanguage: widget.autocompleteLanguage,
+                            initialSearchString: widget.initialSearchString,
+                            autocompleteOnTrailingWhitespace:
+                                widget.autocompleteOnTrailingWhitespace,
+                            searchForInitialValue: widget.searchForInitialValue,
+                            autocompleteComponents: widget.autocompleteComponents,
+                            onPicked: _pickPrediction
+                        ),
+                      ),
                     ),
                     body: (provider!.currentPosition == null)
                         ? _buildMap(widget.initialPosition)
