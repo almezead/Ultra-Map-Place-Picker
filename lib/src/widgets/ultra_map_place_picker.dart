@@ -79,10 +79,13 @@ class UltraMapPlacePicker extends StatefulWidget {
     this.initialZoomValue = 15,
     this.polygons = const {},
     this.polylines = const {},
+    this.showSearchBar = true,
   });
 
   /// The Google Maps API key for Places API and Geocoding API usage.
   final String googleApiKey;
+
+  final bool showSearchBar;
 
   /// The initial location to center the map on.
   final LocationModel initialPosition;
@@ -332,7 +335,7 @@ class PlacePickerState extends State<UltraMapPlacePicker> {
                       shadowColor: Colors.transparent,
                       backgroundColor: Colors.transparent,
                       titleSpacing: 0.0,
-                      /*title: MapSearchBar(
+                      title: MapSearchBar(
                           showIntroModal: showIntroModal,
                           introModalWidgetBuilder:
                               widget.introModalWidgetBuilder,
@@ -357,7 +360,7 @@ class PlacePickerState extends State<UltraMapPlacePicker> {
                           searchForInitialValue: widget.searchForInitialValue,
                           autocompleteComponents: widget.autocompleteComponents,
                           onPicked: _pickPrediction
-                      ),*/
+                      ),
                     ),
                     body: (provider!.currentPosition == null)
                         ? _buildMap(widget.initialPosition)
