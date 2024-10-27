@@ -52,7 +52,8 @@ class MapSearchBar extends StatelessWidget {
       required this.autocompleteOnTrailingWhitespace,
       required this.searchForInitialValue,
       required this.autocompleteComponents,
-      required this.onPicked});
+      required this.onPicked,
+  });
 
   @override
   Widget build(BuildContext context) {
