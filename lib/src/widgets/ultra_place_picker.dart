@@ -1,3 +1,5 @@
+import 'dart:nativewrappers/_internal/vm/lib/ffi_allocation_patch.dart';
+
 import 'package:flutter/material.dart';
 
 import 'package:flutter_google_maps_webservices/geocoding.dart';
@@ -43,6 +45,7 @@ class UltraPlacePicker extends StatelessWidget {
     this.onCameraMoveStarted,
     this.onCameraMove,
     this.onCameraIdle,
+    this.onCameraIdleInfo,
     this.selectText,
     this.outsideOfPickAreaText,
     this.zoomGesturesEnabled = true,
@@ -85,6 +88,7 @@ class UltraPlacePicker extends StatelessWidget {
   final Function(PlaceProvider)? onCameraMoveStarted;
   final void Function(LocationModel)? onCameraMove;
   final Function(PlaceProvider)? onCameraIdle;
+  final Function(PickResultModel?)? onCameraIdleInfo;
 
   // strings
   final String? selectText;
@@ -153,13 +157,13 @@ class UltraPlacePicker extends StatelessWidget {
         provider.placeSearchingState = SearchingState.idle;
         return;
       }
-
-      provider.selectedPlace =
-          PickResultModel.fromPlaceDetailResult(detailResponse.result);
+      
+      provider.selectedPlace = PickResultModel.fromPlaceDetailResult(detailResponse.result);
     } else {
-      provider.selectedPlace =
-          PickResultModel.fromGeocodingResult(response.results[0]);
+      provider.selectedPlace = PickResultModel.fromGeocodingResult(response.results[0]);
     }
+
+    onCameraIdleInfo?.call(provider.selectedPlace);
 
     provider.placeSearchingState = SearchingState.idle;
   }

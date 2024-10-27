@@ -73,6 +73,7 @@ class UltraMapPlacePicker extends StatefulWidget {
     this.onCameraMoveStarted,
     this.onCameraMove,
     this.onCameraIdle,
+    this.onCameraIdleInfo,
     this.onMapTypeChanged,
     this.zoomGesturesEnabled = true,
     this.zoomControlsEnabled = false,
@@ -243,6 +244,7 @@ class UltraMapPlacePicker extends StatefulWidget {
   /// Called when camera movement has ended, there are no pending
   /// animations and the user has stopped interacting with the map.
   final Function(PlaceProvider)? onCameraIdle;
+  final Function(PickResultModel?)? onCameraIdleInfo;
 
   /// Called when the map type has been changed.
   final Function(UltraMapType)? onMapTypeChanged;
@@ -518,6 +520,7 @@ class PlacePickerState extends State<UltraMapPlacePicker> {
       onCameraMoveStarted: widget.onCameraMoveStarted,
       onCameraMove: widget.onCameraMove,
       onCameraIdle: widget.onCameraIdle,
+      onCameraIdleInfo: widget.onCameraIdleInfo,
       zoomGesturesEnabled: widget.zoomGesturesEnabled,
       zoomControlsEnabled: widget.zoomControlsEnabled,
     );
