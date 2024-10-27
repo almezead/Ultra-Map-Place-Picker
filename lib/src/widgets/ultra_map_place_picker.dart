@@ -335,7 +335,7 @@ class PlacePickerState extends State<UltraMapPlacePicker> {
                       shadowColor: Colors.transparent,
                       backgroundColor: Colors.transparent,
                       titleSpacing: 0.0,
-                      title: MapSearchBar(
+                      title: widget.showSearchBar ? const SizedBox() : MapSearchBar(
                           showIntroModal: showIntroModal,
                           introModalWidgetBuilder:
                               widget.introModalWidgetBuilder,
