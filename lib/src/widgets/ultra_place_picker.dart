@@ -157,13 +157,17 @@ class UltraPlacePicker extends StatelessWidget {
         provider.placeSearchingState = SearchingState.idle;
         return;
       }
-      
-      provider.selectedPlace = PickResultModel.fromPlaceDetailResult(detailResponse.result);
+
+      final pickResultModel = PickResultModel.fromPlaceDetailResult(detailResponse.result);
+      onCameraIdleInfo?.call(pickResultModel);
+      provider.selectedPlace = pickResultModel;
     } else {
-      provider.selectedPlace = PickResultModel.fromGeocodingResult(response.results[0]);
+      final pickResultModel = PickResultModel.fromGeocodingResult(response.results[0]);
+      onCameraIdleInfo?.call(provider.selectedPlace);
+      provider.selectedPlace = pickResultModel;
     }
 
-    onCameraIdleInfo?.call(provider.selectedPlace);
+    
 
     provider.placeSearchingState = SearchingState.idle;
   }
