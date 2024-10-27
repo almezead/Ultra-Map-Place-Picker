@@ -332,7 +332,7 @@ class PlacePickerState extends State<UltraMapPlacePicker> {
                       shadowColor: Colors.transparent,
                       backgroundColor: Colors.transparent,
                       titleSpacing: 0.0,
-                      title: MapSearchBar(
+                      /*title: MapSearchBar(
                           showIntroModal: showIntroModal,
                           introModalWidgetBuilder:
                               widget.introModalWidgetBuilder,
@@ -356,7 +356,8 @@ class PlacePickerState extends State<UltraMapPlacePicker> {
                               widget.autocompleteOnTrailingWhitespace,
                           searchForInitialValue: widget.searchForInitialValue,
                           autocompleteComponents: widget.autocompleteComponents,
-                          onPicked: _pickPrediction),
+                          onPicked: _pickPrediction
+                      ),*/
                     ),
                     body: (provider!.currentPosition == null)
                         ? _buildMap(widget.initialPosition)
