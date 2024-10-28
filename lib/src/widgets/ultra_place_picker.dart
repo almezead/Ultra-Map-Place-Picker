@@ -159,11 +159,11 @@ class UltraPlacePicker extends StatelessWidget {
 
       final pickResultModel = PickResultModel.fromPlaceDetailResult(detailResponse.result);
       onCameraIdleInfo?.call(pickResultModel);
-      provider.selectedPlace = pickResultModel;
+      //provider.selectedPlace = pickResultModel;
     } else {
       final pickResultModel = PickResultModel.fromGeocodingResult(response.results[0]);
-      onCameraIdleInfo?.call(provider.selectedPlace);
-      provider.selectedPlace = pickResultModel;
+      onCameraIdleInfo?.call(pickResultModel);
+      //provider.selectedPlace = pickResultModel;
     }
 
     
