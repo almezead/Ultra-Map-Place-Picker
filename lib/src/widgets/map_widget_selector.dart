@@ -12,7 +12,6 @@ import 'package:ultra_map_place_picker/src/widgets/ultra_map.dart';
 
 class MapWidgetSelector extends StatelessWidget {
   final LocationModel initialTarget;
-  final void Function(PlaceProvider) searchByCameraLocation;
   final VoidCallback? onMoveStart;
   final void Function(UltraMapController)? onMapCreated;
   final ValueChanged<PickResultModel>? onPlacePicked;
@@ -50,7 +49,6 @@ class MapWidgetSelector extends StatelessWidget {
   const MapWidgetSelector(
       {super.key,
       required this.initialTarget,
-      required this.searchByCameraLocation,
       required this.onMoveStart,
       required this.onMapCreated,
       required this.onPlacePicked,
@@ -80,7 +78,6 @@ class MapWidgetSelector extends StatelessWidget {
             isHuaweiDevice: isHuaweiDevice,
             initialTarget: initialTarget,
             mapType: mapType,
-            searchByCameraLocation: searchByCameraLocation,
             onMoveStart: onMoveStart,
             onMapCreated: onMapCreated,
             onPlacePicked: onPlacePicked,

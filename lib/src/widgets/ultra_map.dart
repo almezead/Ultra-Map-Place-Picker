@@ -18,7 +18,6 @@ class UltraMap extends StatelessWidget {
   final PlaceProvider provider;
   final LocationModel initialTarget;
   final UltraMapType mapType;
-  final void Function(PlaceProvider) searchByCameraLocation;
   final VoidCallback? onMoveStart;
   final void Function(UltraMapController)? onMapCreated;
   final ValueChanged<PickResultModel>? onPlacePicked;
@@ -59,7 +58,6 @@ class UltraMap extends StatelessWidget {
       required this.isHuaweiDevice,
       required this.initialTarget,
       required this.mapType,
-      required this.searchByCameraLocation,
       required this.onMoveStart,
       required this.onMapCreated,
       required this.onPlacePicked,
@@ -108,7 +106,6 @@ class UltraMap extends StatelessWidget {
               // When select initialPosition set to true.
               if (selectInitialPosition!) {
                 provider.setCameraPosition(initialTarget);
-                searchByCameraLocation(provider);
               }
               onMapCreated?.call(provider.mapController);
             },
@@ -129,7 +126,6 @@ class UltraMap extends StatelessWidget {
                   }
                   provider.debounceTimer =
                       Timer(Duration(milliseconds: debounceMilliseconds!), () {
-                    searchByCameraLocation(provider);
                   });
                 }
               }
@@ -186,7 +182,6 @@ class UltraMap extends StatelessWidget {
               // When select initialPosition set to true.
               if (selectInitialPosition!) {
                 provider.setCameraPosition(initialTarget);
-                searchByCameraLocation(provider);
               }
               onMapCreated?.call(provider.mapController);
             },
@@ -207,7 +202,6 @@ class UltraMap extends StatelessWidget {
                   }
                   provider.debounceTimer =
                       Timer(Duration(milliseconds: debounceMilliseconds!), () {
-                    searchByCameraLocation(provider);
                   });
                 }
               }

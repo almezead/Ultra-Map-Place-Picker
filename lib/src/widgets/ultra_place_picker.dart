@@ -1,11 +1,8 @@
 
 import 'package:flutter/material.dart';
 
-import 'package:flutter_google_maps_webservices/geocoding.dart';
-import 'package:flutter_google_maps_webservices/places.dart';
 import 'package:ultra_map_place_picker/src/models/location_model.dart';
 import 'package:ultra_map_place_picker/src/controllers/ultra_map_controller.dart';
-import 'package:ultra_map_place_picker/src/enums.dart';
 import 'package:ultra_map_place_picker/src/models/ultra_polygon_model.dart';
 import 'package:ultra_map_place_picker/src/models/ultra_polyline_model.dart';
 import 'package:ultra_map_place_picker/src/providers/place_provider.dart';
@@ -104,73 +101,6 @@ class UltraPlacePicker extends StatelessWidget {
   final Set<UltraPolygonModel> polygons;
   final Set<UltraPolylineModel> polylines;
 
-  _searchByCameraLocation(final PlaceProvider provider) async {
-    // We don't want to search location again if camera location is changed by zooming in/out.
-    if (forceSearchOnZoomChanged == false &&
-        provider.prevCameraPosition != null &&
-        provider.prevCameraPosition!.latitude ==
-            provider.cameraPosition!.latitude &&
-        provider.prevCameraPosition!.longitude ==
-            provider.cameraPosition!.longitude) {
-      provider.placeSearchingState = SearchingState.idle;
-      return;
-    }
-
-    if (provider.cameraPosition == null) {
-      // Camera position cannot be determined for some reason ...
-      provider.placeSearchingState = SearchingState.idle;
-      return;
-    }
-
-    provider.placeSearchingState = SearchingState.searching;
-
-    final GeocodingResponse response =
-        await provider.geocoding.searchByLocation(
-      Location(
-          lat: provider.cameraPosition!.latitude,
-          lng: provider.cameraPosition!.longitude),
-      language: language,
-    );
-
-    if (response.errorMessage?.isNotEmpty == true ||
-        response.status == 'REQUEST_DENIED') {
-      if (onSearchFailed != null) {
-        onSearchFailed!(response.status);
-      }
-      provider.placeSearchingState = SearchingState.idle;
-      return;
-    }
-
-    if (usePlaceDetailSearch!) {
-      final PlacesDetailsResponse detailResponse =
-          await provider.places.getDetailsByPlaceId(
-        response.results[0].placeId,
-        language: language,
-      );
-
-      if (detailResponse.errorMessage?.isNotEmpty == true ||
-          detailResponse.status == 'REQUEST_DENIED') {
-        if (onSearchFailed != null) {
-          onSearchFailed!(detailResponse.status);
-        }
-        provider.placeSearchingState = SearchingState.idle;
-        return;
-      }
-
-      final pickResultModel = PickResultModel.fromPlaceDetailResult(detailResponse.result);
-      onCameraIdleInfo?.call(pickResultModel);
-      //provider.selectedPlace = pickResultModel;
-    } else {
-      final pickResultModel = PickResultModel.fromGeocodingResult(response.results[0]);
-      onCameraIdleInfo?.call(pickResultModel);
-      //provider.selectedPlace = pickResultModel;
-    }
-
-    
-
-    provider.placeSearchingState = SearchingState.idle;
-  }
-
   @override
   Widget build(final BuildContext context) {
     return Stack(
@@ -220,7 +150,6 @@ class UltraPlacePicker extends StatelessWidget {
 
   Widget buildMapWidgetSelector() => MapWidgetSelector(
       initialTarget: initialTarget,
-      searchByCameraLocation: _searchByCameraLocation,
       onMoveStart: onMoveStart,
       onMapCreated: onMapCreated,
       onPlacePicked: onPlacePicked,

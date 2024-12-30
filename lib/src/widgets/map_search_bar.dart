@@ -28,7 +28,7 @@ class MapSearchBar extends StatelessWidget {
   final bool autocompleteOnTrailingWhitespace;
   final bool searchForInitialValue;
   final List<Component>? autocompleteComponents;
-  final void Function(Prediction) onPicked;
+  //final void Function(Prediction) onPicked;
 
   const MapSearchBar(
       {super.key,
@@ -52,7 +52,7 @@ class MapSearchBar extends StatelessWidget {
       required this.autocompleteOnTrailingWhitespace,
       required this.searchForInitialValue,
       required this.autocompleteComponents,
-      required this.onPicked,
+      //required this.onPicked,
   });
 
   @override
@@ -84,7 +84,7 @@ class MapSearchBar extends StatelessWidget {
                             : Colors.white,
                         padding: EdgeInsets.zero))
             : Container(),
-        Expanded(
+        /*Expanded(
           child: AutoCompleteSearch(
               appBarKey: appBarKey,
               autoCompleteSearchController: searchBarController,
@@ -109,7 +109,7 @@ class MapSearchBar extends StatelessWidget {
               searchForInitialValue: searchForInitialValue,
               autocompleteOnTrailingWhitespace:
                   autocompleteOnTrailingWhitespace),
-        ),
+        ),*/
         const SizedBox(width: 5),
       ],
     );
