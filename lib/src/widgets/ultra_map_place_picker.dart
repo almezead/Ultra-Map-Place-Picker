@@ -10,7 +10,6 @@ import 'package:huawei_map/huawei_map.dart';
 import 'package:ultra_map_place_picker/src/widgets/ultra_place_picker.dart';
 import 'package:uuid/uuid.dart';
 import 'package:ultra_map_place_picker/src/models/location_model.dart';
-import 'package:ultra_map_place_picker/src/controllers/auto_complete_search_controller.dart';
 import 'package:ultra_map_place_picker/src/controllers/ultra_map_controller.dart';
 import 'package:ultra_map_place_picker/src/enums.dart';
 import 'package:ultra_map_place_picker/src/models/ultra_circle_model.dart';
@@ -20,7 +19,6 @@ import 'package:ultra_map_place_picker/src/models/ultra_polyline_model.dart';
 import 'package:ultra_map_place_picker/src/providers/place_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:ultra_map_place_picker/src/widgets/intro_modal.dart';
-import 'package:ultra_map_place_picker/src/widgets/map_search_bar.dart';
 import 'package:ultra_map_place_picker/src/widgets/pin_widget_selector.dart';
 import 'package:ultra_map_place_picker/src/widgets/place_builder_selector.dart';
 
@@ -263,8 +261,6 @@ class PlacePickerState extends State<UltraMapPlacePicker> {
   GlobalKey appBarKey = GlobalKey();
   late final Future<PlaceProvider> _futureProvider;
   PlaceProvider? provider;
-  AutoCompleteSearchController searchBarController =
-      AutoCompleteSearchController();
   bool showIntroModal = true;
   bool isHuaweiDevice = false;
 
@@ -276,7 +272,6 @@ class PlacePickerState extends State<UltraMapPlacePicker> {
 
   @override
   void dispose() {
-    searchBarController.dispose();
     super.dispose();
   }
 
@@ -309,7 +304,6 @@ class PlacePickerState extends State<UltraMapPlacePicker> {
   @override
   Widget build(final BuildContext context) {
     return PopScope(
-        onPopInvokedWithResult: (_, __) => searchBarController.clearOverlay(),
         child: FutureBuilder<PlaceProvider>(
           future: _futureProvider,
           builder: (final context, final snapshot) {
@@ -335,36 +329,7 @@ class PlacePickerState extends State<UltraMapPlacePicker> {
                       shadowColor: Colors.transparent,
                       backgroundColor: Colors.transparent,
                       titleSpacing: 0.0,
-                      title:   SizedBox(
-                        height: widget.showSearchBar ? null : 0,
-                        width: widget.showSearchBar ? null : 0,
-                        child: MapSearchBar(
-                            showIntroModal: showIntroModal,
-                            introModalWidgetBuilder:
-                                widget.introModalWidgetBuilder,
-                            onTapBack: widget.onTapBack,
-                            appBarKey: appBarKey,
-                            provider: provider,
-                            searchBarController: searchBarController,
-                            autocompleteOffset: widget.autocompleteOffset,
-                            hintText: widget.hintText,
-                            searchingText: widget.searchingText,
-                            region: widget.region,
-                            strictbounds: widget.strictbounds,
-                            autocompleteTypes: widget.autocompleteTypes,
-                            onAutoCompleteFailed: widget.onAutoCompleteFailed,
-                            autoCompleteDebounceInMilliseconds:
-                                widget.autoCompleteDebounceInMilliseconds,
-                            autocompleteRadius: widget.autocompleteRadius,
-                            autocompleteLanguage: widget.autocompleteLanguage,
-                            initialSearchString: widget.initialSearchString,
-                            autocompleteOnTrailingWhitespace:
-                                widget.autocompleteOnTrailingWhitespace,
-                            searchForInitialValue: widget.searchForInitialValue,
-                            autocompleteComponents: widget.autocompleteComponents,
-                            //onPicked: _pickPrediction
-                        ),
-                      ),
+                      
                     ),
                     body: (provider!.currentPosition == null)
                         ? _buildMap(widget.initialPosition)
@@ -512,7 +477,6 @@ class PlacePickerState extends State<UltraMapPlacePicker> {
         if (provider == null) {
           return;
         }
-        searchBarController.reset();
       },
       onPlacePicked: widget.onPlacePicked,
       onCameraMoveStarted: widget.onCameraMoveStarted,
