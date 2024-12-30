@@ -96,42 +96,9 @@ class PickResultModel {
   /// Reviews of the place.
   final List<Review>? reviews;
 
-  factory PickResultModel.fromGeocodingResult(final GeocodingResult result) {
-    return PickResultModel(
-      placeId: result.placeId,
-      geometry: result.geometry,
-      formattedAddress: result.formattedAddress,
-      types: result.types,
-      addressComponents: result.addressComponents,
-    );
-  }
 
-  factory PickResultModel.fromPlaceDetailResult(final PlaceDetails result) {
-    return PickResultModel(
-      placeId: result.placeId,
-      geometry: result.geometry,
-      formattedAddress: result.formattedAddress,
-      types: result.types,
-      addressComponents: result.addressComponents,
-      adrAddress: result.adrAddress,
-      formattedPhoneNumber: result.formattedPhoneNumber,
-      id: result.id,
-      reference: result.reference,
-      icon: result.icon,
-      name: result.name,
-      openingHours: result.openingHours,
-      photos: result.photos,
-      internationalPhoneNumber: result.internationalPhoneNumber,
-      priceLevel: result.priceLevel,
-      rating: result.rating,
-      scope: result.scope,
-      url: result.url,
-      vicinity: result.vicinity,
-      utcOffset: result.utcOffset,
-      website: result.website,
-      reviews: result.reviews,
-    );
-  }
+
+ 
   LocationModel get toLocationModel =>
       LocationModel(geometry!.location.lat, geometry!.location.lng);
 

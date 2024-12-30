@@ -41,7 +41,6 @@ class UltraPlacePicker extends StatelessWidget {
     this.onCameraMoveStarted,
     this.onCameraMove,
     this.onCameraIdle,
-    this.onCameraIdleInfo,
     this.selectText,
     this.outsideOfPickAreaText,
     this.zoomGesturesEnabled = true,
@@ -84,7 +83,6 @@ class UltraPlacePicker extends StatelessWidget {
   final Function(PlaceProvider)? onCameraMoveStarted;
   final void Function(LocationModel)? onCameraMove;
   final Function(PlaceProvider)? onCameraIdle;
-  final Function(PickResultModel?)? onCameraIdleInfo;
 
   // strings
   final String? selectText;
