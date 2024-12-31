@@ -4,7 +4,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart' as gm;
-import 'package:huawei_map/huawei_map.dart' as hm;
 import 'package:ultra_map_place_picker/src/models/location_model.dart';
 import 'package:ultra_map_place_picker/src/controllers/ultra_map_controller.dart';
 import 'package:ultra_map_place_picker/src/enums.dart';
@@ -44,7 +43,6 @@ class UltraMap extends StatelessWidget {
   /// Zoom feature toggle
   final bool zoomGesturesEnabled;
   final bool zoomControlsEnabled;
-  final bool isHuaweiDevice;
   final double initialZoomValue;
 
   /// Use never scrollable scroll-view with maximum dimensions to prevent unnecessary re-rendering.
@@ -55,7 +53,6 @@ class UltraMap extends StatelessWidget {
   const UltraMap(
       {super.key,
       required this.provider,
-      required this.isHuaweiDevice,
       required this.initialTarget,
       required this.mapType,
       required this.onMoveStart,
@@ -79,84 +76,7 @@ class UltraMap extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return isHuaweiDevice
-        ? hm.HuaweiMap(
-            polygons: polygons.map((p) => p.toHuaweiPolygon).toSet(),
-            polylines: polylines.map((p) => p.toHuaweiPolyline).toSet(),
-            zoomGesturesEnabled: zoomGesturesEnabled,
-            zoomControlsEnabled: false,
-            // we use our own implementation that supports iOS as well, see _buildZoomButtons()
-            myLocationButtonEnabled: false,
-            compassEnabled: false,
-            mapToolbarEnabled: false,
-            initialCameraPosition: hm.CameraPosition(
-                target:
-                    hm.LatLng(initialTarget.latitude, initialTarget.longitude),
-                zoom: initialZoomValue),
-            mapType: mapType.huaweiMapType,
-            myLocationEnabled: true,
-            circles: pickArea != null && pickArea!.toHuaweiCircle.radius > 0
-                ? {pickArea!.toHuaweiCircle}
-                : {},
-            onMapCreated: (final hm.HuaweiMapController controller) {
-              provider.mapController.completeHuaweiController(controller);
-              provider.setCameraPosition(null);
-              provider.pinState = PinState.idle;
-
-              // When select initialPosition set to true.
-              if (selectInitialPosition!) {
-                provider.setCameraPosition(initialTarget);
-              }
-              onMapCreated?.call(provider.mapController);
-            },
-            onCameraIdle: () {
-              if (provider.isAutoCompleteSearching) {
-                provider.isAutoCompleteSearching = false;
-                provider.pinState = PinState.idle;
-                provider.placeSearchingState = SearchingState.idle;
-                return;
-              }
-              // Perform search only if the setting is to true.
-              if (usePinPointingSearch!) {
-                // Search current camera location only if camera has moved (dragged) before.
-                if (provider.pinState == PinState.dragging) {
-                  // Cancel previous timer.
-                  if (provider.debounceTimer?.isActive ?? false) {
-                    provider.debounceTimer!.cancel();
-                  }
-                  provider.debounceTimer =
-                      Timer(Duration(milliseconds: debounceMilliseconds!), () {
-                  });
-                }
-              }
-              provider.pinState = PinState.idle;
-              onCameraIdle?.call(provider);
-            },
-            onCameraMoveStarted: (_) {
-              onCameraMoveStarted?.call(provider);
-              provider.setPrevCameraPosition(provider.cameraPosition);
-              // Cancel any other timer.
-              provider.debounceTimer?.cancel();
-              // Update state, dismiss keyboard and clear text.
-              provider.pinState = PinState.dragging;
-              // Begins the search state if the hide details is enabled
-              if (hidePlaceDetailsWhenDraggingPin!) {
-                provider.placeSearchingState = SearchingState.searching;
-              }
-              onMoveStart!();
-            },
-            onCameraMove: (final hm.CameraPosition position) {
-              provider.setCameraPosition(
-                  LocationModel(position.target.lat, position.target.lng));
-              onCameraMove?.call(
-                  LocationModel(position.target.lat, position.target.lng));
-            },
-            // gestureRecognizers make it possible to navigate the map when it's a
-            // child in a scroll view e.g ListView, SingleChildScrollView...
-            gestureRecognizers: {}..add(Factory<EagerGestureRecognizer>(
-                () => EagerGestureRecognizer())),
-          )
-        : gm.GoogleMap(
+    return gm.GoogleMap(
             polygons: polygons.map((p) => p.toGooglePolygon).toSet(),
             polylines: polylines.map((p) => p.toGooglePolyline).toSet(),
             zoomGesturesEnabled: zoomGesturesEnabled,

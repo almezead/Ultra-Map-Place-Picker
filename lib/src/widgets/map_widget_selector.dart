@@ -38,7 +38,6 @@ class MapWidgetSelector extends StatelessWidget {
   /// Zoom feature toggle
   final bool zoomGesturesEnabled;
   final bool zoomControlsEnabled;
-  final bool isHuaweiDevice;
   final double initialZoomValue;
 
   /// Use never scrollable scroll-view with maximum dimensions to prevent unnecessary re-rendering.
@@ -64,7 +63,6 @@ class MapWidgetSelector extends StatelessWidget {
       required this.selectText,
       required this.zoomGesturesEnabled,
       required this.zoomControlsEnabled,
-      required this.isHuaweiDevice,
       required this.initialZoomValue,
       required this.polygons,
       required this.polylines});
@@ -75,7 +73,6 @@ class MapWidgetSelector extends StatelessWidget {
         selector: (final _, final provider) => provider.mapType,
         builder: (final _, final mapType, final __) => UltraMap(
             provider: PlaceProvider.of(context, listen: false),
-            isHuaweiDevice: isHuaweiDevice,
             initialTarget: initialTarget,
             mapType: mapType,
             onMoveStart: onMoveStart,

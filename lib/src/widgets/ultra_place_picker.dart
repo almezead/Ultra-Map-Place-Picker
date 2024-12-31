@@ -17,7 +17,6 @@ import 'package:ultra_map_place_picker/src/widgets/zoom_buttons.dart';
 class UltraPlacePicker extends StatelessWidget {
   const UltraPlacePicker({
     required this.appBarKey,
-    required this.isHuaweiDevice,
     required this.initialTarget,
     super.key,
     this.selectedPlaceWidgetBuilder,
@@ -70,7 +69,6 @@ class UltraPlacePicker extends StatelessWidget {
 
   final bool? usePinPointingSearch;
   final bool? usePlaceDetailSearch;
-  final bool isHuaweiDevice;
   final bool? selectInitialPosition;
 
   final String? language;
@@ -163,7 +161,6 @@ class UltraPlacePicker extends StatelessWidget {
       selectText: selectText,
       zoomGesturesEnabled: zoomGesturesEnabled,
       zoomControlsEnabled: zoomControlsEnabled,
-      isHuaweiDevice: isHuaweiDevice,
       initialZoomValue: initialZoomValue,
       polygons: polygons,
       polylines: polylines);

@@ -5,8 +5,6 @@ import 'package:http/http.dart';
 import 'package:flutter_google_maps_webservices/places.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_api_headers/google_api_headers.dart';
-import 'package:google_huawei_availability/google_huawei_availability.dart';
-import 'package:huawei_map/huawei_map.dart';
 import 'package:ultra_map_place_picker/src/widgets/ultra_place_picker.dart';
 import 'package:uuid/uuid.dart';
 import 'package:ultra_map_place_picker/src/models/location_model.dart';
@@ -26,7 +24,6 @@ class UltraMapPlacePicker extends StatefulWidget {
   const UltraMapPlacePicker({
     required this.initialPosition,
     required this.googleApiKey,
-    required this.mapTypes,
     super.key,
     this.onPlacePicked,
     this.useCurrentLocation,
@@ -131,7 +128,6 @@ class UltraMapPlacePicker extends StatefulWidget {
   final String? region;
 
   final double initialZoomValue;
-  final List<UltraMapType> Function(bool isHuaweiDevice) mapTypes;
 
   /// If set the picker can only pick addresses in the given circle area.
   /// The section will be highlighted.
@@ -262,7 +258,6 @@ class PlacePickerState extends State<UltraMapPlacePicker> {
   late final Future<PlaceProvider> _futureProvider;
   PlaceProvider? provider;
   bool showIntroModal = true;
-  bool isHuaweiDevice = false;
 
   @override
   void initState() {
@@ -276,13 +271,6 @@ class PlacePickerState extends State<UltraMapPlacePicker> {
   }
 
   Future<PlaceProvider> getPlaceProvider() async {
-    try {
-      isHuaweiDevice =
-          !(await GoogleHuaweiAvailability.isGoogleServiceAvailable ?? true);
-      if (isHuaweiDevice) {
-        HuaweiMapInitializer.initializeMap();
-      }
-    } catch (_) {}
     final Map<String, String> headers =
         await const GoogleApiHeaders().getHeaders();
     final PlaceProvider provider = PlaceProvider(
@@ -290,7 +278,7 @@ class PlacePickerState extends State<UltraMapPlacePicker> {
         widget.proxyBaseUrl,
         widget.httpClient,
         headers,
-        widget.mapTypes(isHuaweiDevice));
+    );
     provider.sessionToken = const Uuid().v4();
     provider.desiredAccuracy = widget.desiredLocationAccuracy;
     provider.setUltraMapType(widget.initialMapType);
@@ -426,7 +414,6 @@ class PlacePickerState extends State<UltraMapPlacePicker> {
 
   Widget _buildMap(final LocationModel initialTarget) {
     return UltraPlacePicker(
-      isHuaweiDevice: isHuaweiDevice,
       polygons: widget.polygons,
       polylines: widget.polylines,
       initialZoomValue: widget.initialZoomValue,
