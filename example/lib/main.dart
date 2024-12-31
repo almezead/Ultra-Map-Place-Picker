@@ -36,6 +36,7 @@ class _MyHomePageState extends State<MyHomePage> {
       initialPosition: LocationModel(25.1974767426511, 55.279669543133615),
       myLocationButtonCooldown: 1,
       zoomControlsEnabled: false,
+      mapTypes: () => UltraMapType.values,
       resizeToAvoidBottomInset:
           false, // only works in page mode, less flickery, remove if wrong offsets
     );

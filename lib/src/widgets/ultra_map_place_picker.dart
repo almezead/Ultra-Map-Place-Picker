@@ -24,6 +24,7 @@ class UltraMapPlacePicker extends StatefulWidget {
   const UltraMapPlacePicker({
     required this.initialPosition,
     required this.googleApiKey,
+    required this.mapTypes,
     super.key,
     this.onPlacePicked,
     this.useCurrentLocation,
@@ -126,7 +127,7 @@ class UltraMapPlacePicker extends StatefulWidget {
   final List<Component>? autocompleteComponents;
   final bool? strictbounds;
   final String? region;
-
+  final List<UltraMapType> Function() mapTypes;
   final double initialZoomValue;
 
   /// If set the picker can only pick addresses in the given circle area.
@@ -278,6 +279,7 @@ class PlacePickerState extends State<UltraMapPlacePicker> {
         widget.proxyBaseUrl,
         widget.httpClient,
         headers,
+        widget.mapTypes()
     );
     provider.sessionToken = const Uuid().v4();
     provider.desiredAccuracy = widget.desiredLocationAccuracy;
