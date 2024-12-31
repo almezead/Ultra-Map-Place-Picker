@@ -7,7 +7,6 @@ import 'package:flutter_google_maps_webservices/geocoding.dart';
 import 'package:flutter_google_maps_webservices/places.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:http/http.dart';
-import 'package:huawei_map/huawei_map.dart';
 import 'package:provider/provider.dart';
 import 'package:ultra_map_place_picker/src/models/location_model.dart';
 import 'package:ultra_map_place_picker/src/controllers/ultra_map_controller.dart';
@@ -127,11 +126,6 @@ class PlaceProvider extends ChangeNotifier {
   UltraMapController get mapController => _mapController;
   set googleController(final GoogleMapController? controller) {
     _mapController.completeGoogleController(controller);
-    notifyListeners();
-  }
-
-  set huaweiController(final HuaweiMapController? controller) {
-    _mapController.completeHuaweiController(controller);
     notifyListeners();
   }
 

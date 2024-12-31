@@ -24,7 +24,6 @@ dependencies:
     sdk: flutter
 
   provider: ^6.1.2
-  huawei_map: ^6.11.2+303
   google_api_headers: ^4.2.0
   flutter_google_maps_webservices: ^1.1.1
   google_maps_flutter: ^2.9.0

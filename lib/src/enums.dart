@@ -1,35 +1,31 @@
 import 'package:google_maps_flutter/google_maps_flutter.dart' as gm;
-import 'package:huawei_map/huawei_map.dart' as hm;
 
 enum PinState { preparing, idle, dragging }
 
 enum SearchingState { idle, searching }
 
 enum UltraMapType {
-  normal(googleMapType: gm.MapType.normal, huaweiMapType: hm.MapType.normal),
+  normal(googleMapType: gm.MapType.normal),
   satellite(
-      googleMapType: gm.MapType.satellite, huaweiMapType: hm.MapType.normal),
-  terrain(googleMapType: gm.MapType.terrain, huaweiMapType: hm.MapType.terrain),
-  hybrid(googleMapType: gm.MapType.hybrid, huaweiMapType: hm.MapType.normal);
+      googleMapType: gm.MapType.satellite),
+  terrain(googleMapType: gm.MapType.terrain),
+  hybrid(googleMapType: gm.MapType.hybrid);
 
   final gm.MapType googleMapType;
-  final hm.MapType huaweiMapType;
   const UltraMapType(
-      {required this.googleMapType, required this.huaweiMapType});
+      {required this.googleMapType});
 }
 
 enum UltraJointType {
   mitered(
-      googleJointType: gm.JointType.mitered,
-      huaweiJointType: hm.JointType.mitered),
+      googleJointType: gm.JointType.mitered),
   bevel(
-      googleJointType: gm.JointType.bevel, huaweiJointType: hm.JointType.bevel),
+      googleJointType: gm.JointType.bevel),
   round(
-      googleJointType: gm.JointType.round, huaweiJointType: hm.JointType.round),
+      googleJointType: gm.JointType.round),
   ;
 
   final gm.JointType googleJointType;
-  final hm.JointType huaweiJointType;
   const UltraJointType(
-      {required this.googleJointType, required this.huaweiJointType});
+      {required this.googleJointType});
 }

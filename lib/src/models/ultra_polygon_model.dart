@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart' as gm;
-import 'package:huawei_map/huawei_map.dart' as hm;
 import 'package:ultra_map_place_picker/src/models/location_model.dart';
 
 class UltraPolygonModel {
@@ -48,27 +47,5 @@ class UltraPolygonModel {
                     .toList())
                 .toList() ??
             [],
-      );
-
-  hm.Polygon get toHuaweiPolygon => hm.Polygon(
-        polygonId: hm.PolygonId(polygonId),
-        clickable: onClick != null,
-        fillColor: fillColor ?? Colors.black,
-        geodesic: geodesic ?? false,
-        points: points
-                ?.map((point) => hm.LatLng(point.latitude, point.longitude))
-                .toList() ??
-            [],
-        holes: holes
-                ?.map((holeList) => holeList
-                    .map((hole) => hm.LatLng(hole.latitude, hole.longitude))
-                    .toList())
-                .toList() ??
-            [],
-        visible: visible ?? true,
-        strokeColor: strokeColor ?? Colors.black,
-        strokeWidth: strokeWidth ?? 10,
-        zIndex: zIndex ?? 0,
-        onClick: onClick,
       );
 }

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart' as gm;
-import 'package:huawei_map/huawei_map.dart' as hm;
 import 'package:ultra_map_place_picker/src/enums.dart';
 import 'package:ultra_map_place_picker/src/models/location_model.dart';
 
@@ -40,18 +39,5 @@ class UltraPolylineModel {
         onTap: onClick,
       );
 
-  hm.Polyline get toHuaweiPolyline => hm.Polyline(
-        polylineId: hm.PolylineId(polylineId),
-        points: points
-            .map((point) => hm.LatLng(point.latitude, point.longitude))
-            .toList(),
-        geodesic: geodesic ?? false,
-        width: width ?? 1,
-        color: color ?? Colors.red,
-        jointType: jointType?.huaweiJointType ?? hm.JointType.mitered,
-        visible: visible ?? true,
-        zIndex: zIndex ?? 0,
-        clickable: onClick != null,
-        onClick: onClick,
-      );
+
 }
