@@ -1,13 +1,13 @@
 # This is a generated file; do not edit or check into version control.
-flutter_plugin_android_lifecycle=/Users/aliayasrah/.pub-cache/hosted/pub.dev/flutter_plugin_android_lifecycle-2.0.23/
-geolocator=/Users/aliayasrah/.pub-cache/hosted/pub.dev/geolocator-13.0.1/
+flutter_plugin_android_lifecycle=/Users/aliayasrah/.pub-cache/hosted/pub.dev/flutter_plugin_android_lifecycle-2.0.24/
+geolocator=/Users/aliayasrah/.pub-cache/hosted/pub.dev/geolocator-13.0.2/
 geolocator_android=/Users/aliayasrah/.pub-cache/hosted/pub.dev/geolocator_android-4.6.1/
-geolocator_apple=/Users/aliayasrah/.pub-cache/hosted/pub.dev/geolocator_apple-2.3.7/
+geolocator_apple=/Users/aliayasrah/.pub-cache/hosted/pub.dev/geolocator_apple-2.3.8+1/
 geolocator_web=/Users/aliayasrah/.pub-cache/hosted/pub.dev/geolocator_web-4.1.1/
 geolocator_windows=/Users/aliayasrah/.pub-cache/hosted/pub.dev/geolocator_windows-0.2.3/
-google_api_headers=/Users/aliayasrah/.pub-cache/hosted/pub.dev/google_api_headers-4.2.4/
-google_maps_flutter=/Users/aliayasrah/.pub-cache/hosted/pub.dev/google_maps_flutter-2.9.0/
-google_maps_flutter_android=/Users/aliayasrah/.pub-cache/hosted/pub.dev/google_maps_flutter_android-2.14.10/
-google_maps_flutter_ios=/Users/aliayasrah/.pub-cache/hosted/pub.dev/google_maps_flutter_ios-2.13.1/
+google_api_headers=/Users/aliayasrah/.pub-cache/hosted/pub.dev/google_api_headers-4.4.0/
+google_maps_flutter=/Users/aliayasrah/.pub-cache/hosted/pub.dev/google_maps_flutter-2.10.0/
+google_maps_flutter_android=/Users/aliayasrah/.pub-cache/hosted/pub.dev/google_maps_flutter_android-2.14.12/
+google_maps_flutter_ios=/Users/aliayasrah/.pub-cache/hosted/pub.dev/google_maps_flutter_ios-2.13.2/
 google_maps_flutter_web=/Users/aliayasrah/.pub-cache/hosted/pub.dev/google_maps_flutter_web-0.5.10/
-package_info_plus=/Users/aliayasrah/.pub-cache/hosted/pub.dev/package_info_plus-8.1.0/
+package_info_plus=/Users/aliayasrah/.pub-cache/hosted/pub.dev/package_info_plus-8.2.1/
