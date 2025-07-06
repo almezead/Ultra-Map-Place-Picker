@@ -42,7 +42,8 @@ class DefaultPin extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 AnimatedPin(
-                    child: Icon(Icons.place, size: 36, color: Colors.red)),
+                  child: AssetImage("assets/location_pin.png"), //Icon(Icons.place, size: 36, color: Colors.red)
+                ),
                 SizedBox(height: 42),
               ],
             ),
