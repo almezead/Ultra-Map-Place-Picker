@@ -13,11 +13,11 @@ class DefaultPin extends StatelessWidget {
     } else if (state == PinState.idle) {
       return Stack(
         children: <Widget>[
-          const Center(
+          Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                Icon(Icons.place, size: 36, color: Colors.red),
+                Image.asset("assets/icons/location_pin.png"),
                 SizedBox(height: 42),
               ],
             ),
