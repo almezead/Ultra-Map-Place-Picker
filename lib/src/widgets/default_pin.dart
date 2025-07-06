@@ -37,7 +37,7 @@ class DefaultPin extends StatelessWidget {
     } else {
       return Stack(
         children: <Widget>[
-          const Center(
+          Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
