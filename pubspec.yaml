@@ -44,7 +44,7 @@ flutter:
 
   # To add assets to your package, add an assets section, like this:
   assets:
-    - icons/location_pin.png
+    - assets/icons/location_pin.png
 
   #
   # For details regarding assets in packages, see
